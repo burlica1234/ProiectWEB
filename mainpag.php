@@ -1,0 +1,50 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Generator de Date</title>
+    <link rel="stylesheet" href="mainpag.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <h1 class="logo">🧮 Generator Informatica</h1>
+        <div class="nav-links">
+            <?php if (isset($_SESSION['user'])): ?>
+                <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
+            <?php else: ?>
+                <a href="login.php">Autentificare</a>
+                <a href="register.php">Înregistrare</a>
+            <?php endif; ?>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    <h2 class="section-title">Ce tip de date vrei să generezi?</h2>
+    <div class="card-container">
+        <a class="card-box" href="generator_siruri.php">
+            <h3>🔢 Șiruri de numere</h3>
+            <p>Generează șiruri cu valori random, sortate sau personalizate.</p>
+        </a>
+        <a class="card-box" href="generator_matrici.php">
+            <h3>🔲 Matrici</h3>
+            <p>Matrici pentru testare: umplere, parcurgere, hartă etc.</p>
+        </a>
+        <a class="card-box" href="generator_grafuri.php">
+            <h3>🕸️ Grafuri / Arbori</h3>
+            <p>Grafuri conexe, bipartite, orientate sau neorientate.</p>
+        </a>
+        <a class="card-box" href="generator_text.php">
+            <h3>🔤 Șiruri de caractere</h3>
+            <p>Testează algoritmi pe stringuri generate automat.</p>
+        </a>
+    </div>
+</main>
+
+
+
+</body>
+</html>
