@@ -38,7 +38,7 @@
             e.preventDefault();
             const formData = new FormData(this);
 
-            fetch('api/generator_sir.php', {
+            fetch('../api/array_generator.php', {
                 method: 'POST',
                 body: formData
             })
