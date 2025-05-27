@@ -63,7 +63,7 @@ body {
 .card-container {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* exact 2 pe rând */
 }
 
 /* CARD DESIGN */
@@ -95,5 +95,8 @@ body {
 /* FOOTER */
 footer {
     margin-top: 40px;
-    padding: 20
+    padding: 20px;
+    text-align: center;
+    background-color: #0B0F19;
+    color: #fff;
 }

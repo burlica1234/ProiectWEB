@@ -3,8 +3,11 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aplicație pentru generarea de date pentru informatică.">
     <title>Generator de Date</title>
     <link rel="stylesheet" href="mainpag.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 
@@ -13,7 +16,7 @@
         <h1 class="logo">🧮 Generator Informatica</h1>
         <div class="nav-links">
             <?php if (isset($_SESSION['user'])): ?>
-                <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
+                <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user'] ?? 'utilizator') ?>!</span>
             <?php else: ?>
                 <a href="login.php">Autentificare</a>
                 <a href="register.php">Înregistrare</a>
@@ -43,8 +46,6 @@
         </a>
     </div>
 </main>
-
-
 
 </body>
 </html>
