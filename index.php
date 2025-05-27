@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Aplicație pentru generarea de date pentru informatică.">
     <title>Generator de Date</title>
-    <link rel="stylesheet" href="mainpag.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
 </head>
 <body>
