@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generator Matrici</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/matrici.css">
+    
 </head>
 <body>
     <div class="container">
@@ -25,6 +26,7 @@
 
             <button type="submit">Generează matricea</button>
         </form>
+        <a href="../index.php" class="back-button">← Înapoi la pagina principală</a>
 
         <div id="result" style="margin-top:20px;"></div>
     </div>
