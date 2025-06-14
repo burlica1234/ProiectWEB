@@ -16,10 +16,11 @@
         <h1 class="logo">🧮 Generator Informatica</h1>
         <div class="nav-links">
             <?php if (isset($_SESSION['user'])): ?>
-                <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user'] ?? 'utilizator') ?>!</span>
+                <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
+                <a href="auth/logout.php">Delogare</a>
             <?php else: ?>
-                <a href="login.php">Autentificare</a>
-                <a href="register.php">Înregistrare</a>
+                <a href="auth/login.php">Autentificare</a>
+                <a href="auth/register.php">Înregistrare</a>
             <?php endif; ?>
         </div>
     </div>

@@ -1,0 +1,91 @@
+/* Reset și font global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f4f7fa;
+    color: #2c3e50;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card principal */
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Titlu */
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #34495e;
+}
+
+/* Etichete și inputuri */
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Buton */
+button[type="submit"] {
+    background-color: #619DF1;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #7CABF4;
+}
+
+/* Mesaje eroare sau succes */
+p {
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
+
+/* Link login */
+.back-button {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #34495e;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.back-button:hover {
+    color: #2c3e50;
+}
