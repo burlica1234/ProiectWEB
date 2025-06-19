@@ -12,9 +12,43 @@ body {
     min-height: 100vh;
 }
 
+/* NAVBAR */
+.navbar {
+    background-color: #0B0F19;
+    color: #fff;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    color: #619DF1;
+}
+
+.nav-links a, .welcome {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #7CABF4;
+}
+
 /* ========== CONTAINER CENTRAL ========== */
 .container {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 30px 25px;
     background-color: #fff;
@@ -79,6 +113,32 @@ button[type="submit"]:hover {
     transform: translateY(-1px);
 }
 
+#saveBtn, #loadBtn {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#saveBtn:disabled,
+#loadBtn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#saveBtn:hover:not(:disabled),
+#loadBtn:hover:not(:disabled) {
+    background-color: #005f73;
+}
+
+
+
 /* ========== BUTON ÎNAPOI ========== */
 .back-button {
     display: inline-block;
@@ -98,8 +158,9 @@ button[type="submit"]:hover {
 
 /* ========== LISTA MUCHII ========== */
 #result {
-    margin-top: 30px;
-}
+    overflow-x: auto;
+    text-align: center;
+  }
 
 #result ul {
     list-style-type: none;
@@ -117,7 +178,7 @@ button[type="submit"]:hover {
 svg {
     width: 100%;
     max-width: 600px;
-    height: 400px;
+    height: auto;
     border: 1px solid #ccc;
     background-color: #fff;
     margin-top: 30px;

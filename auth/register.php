@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once 'db.php'; // cale corectă: fișierul e în același folder
+require_once 'db.php'; // cale corecta: fisierul e în acelasi folder
 require_once 'jwt_utils.php';
 
 $msg = "";
 
-// Verifică dacă formularul a fost trimis
+// Verifica daca formularul a fost trimis
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -15,19 +15,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $msg = "Toate câmpurile sunt obligatorii.";
     } else {
         try {
-            // Verifică dacă user/email există deja
+            // Verifica daca user/email exista deja
             $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
             $stmt->execute([$email, $username]);
 
             if ($stmt->fetch()) {
                 $msg = "Emailul sau username-ul există deja.";
             } else {
-                // Creează utilizator
+                // Creeaza utilizator
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
                 $stmt->execute([$username, $email, $hash]);
 
-                // Generează JWT
+                // Genereaza JWT
                 $userId = $pdo->lastInsertId();
                 $token = generate_jwt([
                     'sub' => $userId,
@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     'email' => $email
                 ]);
 
-                // Stochează în sesiune
+                // Stocheaza în sesiune
                 $_SESSION['user'] = $username;
                 $_SESSION['token'] = $token;
 
-                // Redirecționează către index
+                // Redirectioneaza catre index
                 header("Location: ../index.php");
                 exit;
             }

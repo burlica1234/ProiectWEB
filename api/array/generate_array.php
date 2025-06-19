@@ -2,8 +2,8 @@
 header('Content-Type: application/json');
 
 $length = intval($_POST['length'] ?? 0);
-$min = intval($_POST['min'] ?? 0);
-$max = intval($_POST['max'] ?? 0);
+$min = isset($_POST['min']) && $_POST['min'] !== '' ? intval($_POST['min']) : -1000000;
+$max = isset($_POST['max']) && $_POST['max'] !== '' ? intval($_POST['max']) : 1000000;
 $order = $_POST['order'] ?? 'none';
 
 if ($length <= 0 || $min > $max) {

@@ -11,42 +11,42 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="navbar-container">
-        <h1 class="logo">🧮 Generator Informatica</h1>
-        <div class="nav-links">
-            <?php if (isset($_SESSION['user'])): ?>
-                <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
-                <a href="auth/logout.php">Delogare</a>
-            <?php else: ?>
-                <a href="auth/login.php">Autentificare</a>
-                <a href="auth/register.php">Înregistrare</a>
-            <?php endif; ?>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="logo">🧮 Generator Informatica</h1>
+            <div class="nav-links">
+                <?php if (isset($_SESSION['user'])): ?>
+                    <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
+                    <a href="auth/logout.php">Delogare</a>
+                <?php else: ?>
+                    <a href="auth/login.php">Autentificare</a>
+                    <a href="auth/register.php">Înregistrare</a>
+                <?php endif; ?>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<main class="container">
-    <h2 class="section-title">Ce tip de date vrei să generezi?</h2>
-    <div class="card-container">
-        <a class="card-box" href="modules/arrays.php">
-            <h3>🔢 Șiruri de numere</h3>
-            <p>Generează șiruri cu valori random, sortate sau personalizate.</p>
-        </a>
-        <a class="card-box" href="modules/matrices.php">
-            <h3>🔲 Matrici</h3>
-            <p>Matrici pentru testare: umplere, parcurgere, hartă etc.</p>
-        </a>
-        <a class="card-box" href="modules/strings.php">
-            <h3>🔤 Șiruri de caractere</h3>
-            <p>Testează algoritmi pe stringuri generate automat.</p>
-        </a>
-        <a class="card-box" href="modules/graphs.php">
-            <h3>🕸️ Grafuri / Arbori</h3>
-            <p>Grafuri conexe, bipartite, orientate sau neorientate.</p>
-        </a>
-    </div>
-</main>
+    <main class="container">
+        <h2 class="section-title">Ce tip de date vrei să generezi?</h2>
+        <div class="card-container">
+            <a class="card-box" href="modules/arrays.php">
+                <h3>🔢 Șiruri de numere</h3>
+                <p>Generează șiruri cu valori random, sortate sau personalizate.</p>
+            </a>
+            <a class="card-box" href="modules/matrices.php">
+                <h3>🔲 Matrici</h3>
+                <p>Matrici pentru testare: umplere, parcurgere, hartă etc.</p>
+            </a>
+            <a class="card-box" href="modules/strings.php">
+                <h3>🔤 Șiruri de caractere</h3>
+                <p>Testează algoritmi pe stringuri generate automat.</p>
+            </a>
+            <a class="card-box" href="modules/graphs.php">
+                <h3>🕸️ Grafuri / Arbori</h3>
+                <p>Grafuri conexe, bipartite, orientate sau neorientate.</p>
+            </a>
+        </div>
+    </main>
 
 </body>
 </html>

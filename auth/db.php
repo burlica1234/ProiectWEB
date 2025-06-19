@@ -2,9 +2,9 @@
 // auth/db.php
 
 $host = 'localhost';
-$dbname = 'proiect_web'; // Schimbă dacă numele bazei de date e altul
-$user = 'root';          // Schimbă dacă ai alt utilizator MySQL
-$pass = '';              // Schimbă dacă ai setat parolă
+$dbname = 'proiect_web';
+$user = 'root';          
+$pass = '';              
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
