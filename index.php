@@ -7,6 +7,10 @@
     <title>🌿 Generator Informatică</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <?php if (isset($_SESSION['token'])): ?>
+        <meta name="jwt-token" content="<?= htmlspecialchars($_SESSION['token']) ?>">
+    <?php endif; ?>
 </head>
 <body>
     <!-- HEADER / HERO -->
@@ -55,9 +59,10 @@
         <p>&copy; <?= date("Y") ?> Generator Informatica. Creat cu ❤️.</p>
     </footer>
 
-    <?php if (isset($_SESSION['token'])): ?>
-        <script>
-            const token = '<?= $_SESSION['token'] ?>';
+    <script>
+        const tokenMeta = document.querySelector('meta[name="jwt-token"]');
+        if (tokenMeta) {
+            const token = tokenMeta.content;
             try {
                 const payload = JSON.parse(atob(token.split('.')[1]));
                 if (payload.role === 'admin') {
@@ -66,7 +71,7 @@
             } catch (e) {
                 console.warn("Token JWT invalid.");
             }
-        </script>
-    <?php endif; ?>
+        }
+    </script>
 </body>
 </html>
