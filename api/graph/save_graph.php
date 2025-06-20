@@ -2,11 +2,13 @@
 session_start();
 require __DIR__ . '/../../auth/db.php';
 
-if (!isset($_SESSION['user_id'])) {
-  http_response_code(401);
-  echo json_encode(['error' => 'Nu ești autentificat.']);
-  exit;
-}
+$data = json_decode(file_get_contents('php://input'), true);
+$title = trim($data['title'] ?? '');
+$graph = $data['graph'] ?? [];
+
+$type = $data['meta']['type'] ?? 'normal';
+$orientation = $data['meta']['orientation'] ?? 'undirected';
+$format = $data['meta']['format'] ?? 'edges';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $title = trim($data['title'] ?? '');
@@ -16,6 +18,13 @@ if (!$title || !isset($graph['edges'])) {
   echo json_encode(['error' => 'Date invalide.']);
   exit;
 }
+
+// Adaugam tipul si formatul in structura JSON salvata
+$graph['__meta__'] = [
+  'type' => $type,
+  'orientation' => $orientation,
+  'format' => $format
+];
 
 try {
   $stmt = $pdo->prepare("
@@ -31,3 +40,4 @@ try {
 } catch (Exception $e) {
   echo json_encode(['error' => 'Eroare la salvare.']);
 }
+

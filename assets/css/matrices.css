@@ -70,12 +70,25 @@ select {
 #loadBtn {
     width: 100%;
     padding: 12px;
-    margin-top: 10px;
+    
     border: none;
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
     font-size: 15px;
+}
+
+#deleteBtn {
+    background-color: #d41a1a;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 10px;
 }
 
 .primary-btn {

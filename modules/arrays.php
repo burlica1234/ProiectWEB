@@ -49,13 +49,15 @@
                 <button id="saveBtn" type="button" disabled>💾 Salvează</button>
                 <button id="loadBtn" type="button" disabled>📥 Încarcă</button>
             </div>
+            <br><br>
 
             <select id="savedLists">
                 <option value="">-- Alege un șir salvat --</option>
             </select>
+            <button id="deleteBtn" type="button" disabled>🗑️ Sterge</button>
         </form>
 
-        <div id="result" class="result-box"></div>
+        <div id="result" class="result-box">Rezultatul va apărea aici.</div>
 
         <a href="../index.php" class="back-button">⬅ Înapoi la pagina principală</a>
     </div>
@@ -63,6 +65,7 @@
     <script>
         let currentArray = [];
 
+        // generare
         document.getElementById('sirForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -75,8 +78,11 @@
             .then(data => {
                 if (data.array) {
                     currentArray = data.array;
-                    document.getElementById('result').innerHTML =
-                        "<strong>Șir generat:</strong><br><code>" + currentArray.join(', ') + "</code>";
+
+                    const result = document.getElementById('result');
+                    result.innerHTML = "<strong>Șir generat:</strong><br><code></code>";
+                    result.querySelector('code').textContent = currentArray.join(', ');
+
                     document.getElementById('saveBtn').disabled = false;
                 } else {
                     document.getElementById('result').textContent = "Eroare la generare.";
@@ -100,6 +106,7 @@
             });
         }
 
+        // salvare
         document.getElementById('saveBtn').addEventListener('click', () => {
             const title = prompt('Titlu pentru acest șir:');
             if (!title) return;
@@ -115,10 +122,14 @@
             });
         });
 
+        // lista de salvari
         document.getElementById('savedLists').addEventListener('change', e => {
-            document.getElementById('loadBtn').disabled = !e.target.value;
+            const hasSelection = !!e.target.value;
+            document.getElementById('loadBtn').disabled = !hasSelection;
+            document.getElementById('deleteBtn').disabled = !hasSelection;
         });
 
+        // incarcare
         document.getElementById('loadBtn').addEventListener('click', () => {
             const id = document.getElementById('savedLists').value;
             fetch(`../api/array/load_array.php?id=${id}`)
@@ -126,9 +137,33 @@
             .then(data => {
                 if (data.error) return alert(data.error);
                 currentArray = data.array;
-                document.getElementById('result').innerHTML =
-                    "<strong>Șir încărcat:</strong><br><code>" + currentArray.join(', ') + "</code>";
+
+                const result = document.getElementById('result');
+                result.innerHTML = "<strong>Șir încărcat:</strong><br><code></code>";
+                result.querySelector('code').textContent = currentArray.join(', ');
+
                 document.getElementById('saveBtn').disabled = false;
+            });
+        });
+
+        // stergere
+        document.getElementById('deleteBtn').addEventListener('click', () => {
+            const id = document.getElementById('savedLists').value;
+            if (!id) return;
+
+            if (!confirm('Sigur vrei sa stergi acest sir?')) return;
+
+            fetch(`../api/array/delete_array.php?id=${id}`, {
+                method: 'DELETE'
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Sir sters cu succes.');
+                    fetchSaved();
+                } else {
+                    alert(data.error || 'Eroare la stergere.');
+                }
             });
         });
 

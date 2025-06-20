@@ -48,15 +48,18 @@
         </select>
 
         <button type="submit" class="primary-btn">Generează matricea</button>
+        <br><br>
 
         <div class="button-group">
             <button id="saveBtn" type="button" disabled>💾 Salvează</button>
             <button id="loadBtn" type="button" disabled>📥 Încarcă</button>
         </div>
+        <br><br>
 
         <select id="savedMatrices">
             <option value="">-- Alege o matrice salvată --</option>
         </select>
+        <button id="deleteBtn" type="button" disabled>🗑️ Sterge</button>
     </form>
 
     <div id="result" class="result-box">Rezultatul va apărea aici.</div>
@@ -128,6 +131,7 @@
             });
     }
 
+    // salvare
     document.getElementById('saveBtn').addEventListener('click', () => {
         const title = prompt('Titlu pentru această matrice:');
         if (!title) return;
@@ -143,10 +147,14 @@
         });
     });
 
+    // lista de salvari
     document.getElementById('savedMatrices').addEventListener('change', e => {
-        document.getElementById('loadBtn').disabled = !e.target.value;
+        const hasSelection = !!e.target.value;
+        document.getElementById('loadBtn').disabled = !hasSelection;
+        document.getElementById('deleteBtn').disabled = !hasSelection;
     });
 
+    // incarcare
     document.getElementById('loadBtn').addEventListener('click', () => {
         const id = document.getElementById('savedMatrices').value;
         fetch(`../api/matrix/load_matrix.php?id=${id}`)
@@ -174,6 +182,27 @@
             });
     });
 
+    //stergere
+    document.getElementById('deleteBtn').addEventListener('click', () => {
+        const id = document.getElementById('savedMatrices').value;
+        if (!id) return;
+
+        if (!confirm('Sigur vrei sa stergi aceasta matrice?')) return;
+
+        fetch(`../api/matrix/delete_matrix.php?id=${id}`, {
+            method: 'DELETE'
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                alert('Matrice stearsa cu succes.');
+                fetchSaved();
+            } else {
+                alert(data.error || 'Eroare la stergere.');
+            }
+        });
+    });
+    
     fetchSaved();
 </script>
 </body>

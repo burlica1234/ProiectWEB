@@ -95,4 +95,5 @@ if ($format === 'adjacency') {
 }
 
 $response['edges'] = $edgesList;
+$response['nodeCount'] = $nodes;
 echo json_encode($response);

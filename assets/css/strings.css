@@ -77,6 +77,19 @@ select {
     font-size: 15px;
 }
 
+#deleteBtn {
+    background-color: #d41a1a;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
 .primary-btn {
     background-color: #1e5631;
     color: #fff;
