@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $msg = "Completează toate câmpurile.";
     } else {
         try {
-            $stmt = $pdo->prepare("SELECT id, username, password_hash FROM users WHERE email = ?");
+            $stmt = $pdo->prepare("SELECT id, username, password_hash, role FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -23,11 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $token = generate_jwt([
                     'sub' => $user['id'],
                     'username' => $user['username'],
-                    'email' => $email
+                    'email' => $email,
+                    'role' => $user['role']
                 ]);
 
                 $_SESSION['user'] = $user['username'];
                 $_SESSION['user_id'] = $user['id'];
+                $_SESSION['role'] = $user['role'];
                 $_SESSION['token'] = $token;
 
                 header("Location: ../index.php");
@@ -48,23 +50,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 <body>
-    <main class="container">
-        <h2 class="section-title">Autentificare</h2>
-        <form method="POST">
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
+    <div class="login-container">
+        <div class="login-card">
+            <h2 class="title">🔒 Autentificare</h2>
+            <form method="POST">
+                <label for="email">Email:</label>
+                <input type="email" name="email" required>
 
-            <label for="password">Parolă:</label>
-            <input type="password" name="password" required>
+                <label for="password">Parolă:</label>
+                <input type="password" name="password" required>
 
-            <button type="submit">Login</button>
-        </form>
+                <button type="submit">Autentifică-te</button>
+            </form>
 
-        <?php if (!empty($msg)): ?>
-            <p style="color: red; text-align:center"><?= htmlspecialchars($msg) ?></p>
-        <?php endif; ?>
+            <?php if (!empty($msg)): ?>
+                <p class="error-msg"><?= htmlspecialchars($msg) ?></p>
+            <?php endif; ?>
 
-        <a class="back-button" href="../auth/register.php">Nu ai cont? Înregistrează-te</a>
-    </main>
+            <a class="secondary-link" href="register.php">Nu ai cont? Creează unul</a>
+        </div>
+    </div>
 </body>
 </html>

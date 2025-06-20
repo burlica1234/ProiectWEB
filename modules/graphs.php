@@ -63,7 +63,7 @@
             <button id="saveBtn" type="button" disabled>Salvare</button>
             <br><br>
             <select id="savedGraphs">
-                <option value="">-- Încarcă un șir salvat --</option>
+                <option value="">-- Încarcă un graf salvat --</option>
             </select>
             
             <button id="loadBtn" type="button" disabled>Încarcă</button>

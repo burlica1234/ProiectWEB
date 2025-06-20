@@ -1,24 +1,18 @@
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #f4f7fa;
+    background: linear-gradient(to right, #1e5631, #a4de02);
     color: #2c3e50;
     min-height: 100vh;
 }
 
-/* NAVBAR */
+
 .navbar {
     background-color: #0B0F19;
     color: #fff;
     padding: 15px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
 .navbar-container {
     max-width: 1100px;
     margin: auto;
@@ -27,146 +21,125 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
 .logo {
     font-size: 20px;
-    color: #619DF1;
+    color: #a4de02;
 }
-
 .nav-links a, .welcome {
     color: #fff;
     margin-left: 20px;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
 }
-
 .nav-links a:hover {
-    color: #7CABF4;
+    color: #a4de02;
 }
 
-/* MAIN CONTENT */
-.container {
-    max-width: 1200px;
+
+.matrix-generator-card {
+    max-width: 700px;
     margin: 40px auto;
-    padding: 20px;
     background-color: #fff;
+    padding: 30px;
     border-radius: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
-
-.section-title {
-    font-size: 24px;
-    margin-bottom: 30px;
+.matrix-generator-card h2 {
     text-align: center;
-    color: #34495e;
+    margin-bottom: 25px;
+    color: #1e5631;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
+input[type="number"],
 select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
 }
 
-input[type="number"] {
+
+.primary-btn,
+#saveBtn,
+#loadBtn {
     width: 100%;
-    padding: 10px;
-    margin: 0 auto;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-button[type="submit"] {
-    background-color: #619DF1;
-    color: #fff;
+    padding: 12px;
+    margin-top: 10px;
     border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.2s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #7CABF4;
-}
-
-#saveBtn, #loadBtn {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    padding: 10px 16px;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 5px;
-    margin-right: 10px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 15px;
+}
+
+.primary-btn {
+    background-color: #1e5631;
+    color: #fff;
+}
+.primary-btn:hover {
+    background-color: #145c2f;
+}
+
+#saveBtn,
+#loadBtn {
+    background-color: #619DF1;
+    color: white;
 }
 
 #saveBtn:disabled,
 #loadBtn:disabled {
-    background-color: #cccccc;
+    background-color: #ccc;
     cursor: not-allowed;
 }
-
 #saveBtn:hover:not(:disabled),
 #loadBtn:hover:not(:disabled) {
-    background-color: #005f73;
+    background-color: #4a8cd1;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
 }
 
 
-.back-button {
-    display: inline-block;
-    margin-top: 15px;
-    background-color: #34495e;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 16px;
+.result-box {
+    margin-top: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-}
-
-.back-button:hover {
-    background-color: #2c3e50;
-}
-
-#result {
+    padding: 12px;
     overflow-x: auto;
     text-align: center;
 }
 
+
 table {
     border-collapse: collapse;
-    margin-top: 10px;
-}
-
-#result table {
     margin: 0 auto;
-    table-layout: fixed;
 }
-
 td, th {
     border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
+    padding: 5px;
 }
 
 
-footer {
-    margin-top: 40px;
-    padding: 20px;
+.back-button {
+    display: block;
+    margin-top: 20px;
     text-align: center;
-    background-color: #0B0F19;
-    color: #fff;
+    background-color: #34495e;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.back-button:hover {
+    background-color: #2c3e50;
 }

@@ -1,11 +1,10 @@
 <?php
 session_start();
-require_once 'db.php'; // cale corecta: fisierul e în acelasi folder
+require_once 'db.php';
 require_once 'jwt_utils.php';
 
 $msg = "";
 
-// Verifica daca formularul a fost trimis
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -15,31 +14,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $msg = "Toate câmpurile sunt obligatorii.";
     } else {
         try {
-            // Verifica daca user/email exista deja
             $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
             $stmt->execute([$email, $username]);
 
             if ($stmt->fetch()) {
                 $msg = "Emailul sau username-ul există deja.";
             } else {
-                // Creeaza utilizator
-                $hash = password_hash($password, PASSWORD_DEFAULT);
-                $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-                $stmt->execute([$username, $email, $hash]);
+                $count = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+                $role = ($count == 0) ? 'admin' : 'user';
 
-                // Genereaza JWT
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$username, $email, $hash, $role]);
+
+                // obtine user nou inregistrat
                 $userId = $pdo->lastInsertId();
+
                 $token = generate_jwt([
                     'sub' => $userId,
                     'username' => $username,
-                    'email' => $email
+                    'email' => $email,
+                    'role' => $role
                 ]);
 
-                // Stocheaza în sesiune
+                //seteaza in sesiune
                 $_SESSION['user'] = $username;
+                $_SESSION['user_id'] = $userId;
+                $_SESSION['role'] = $role;
                 $_SESSION['token'] = $token;
 
-                // Redirectioneaza catre index
                 header("Location: ../index.php");
                 exit;
             }
@@ -58,21 +61,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="../assets/css/registerpg.css">
 </head>
 <body>
-    <main class="container">
-        <h2 class="section-title">Înregistrare</h2>
-        <form method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
-            <label for="password">Parolă:</label>
-            <input type="password" name="password" required>
-            <button type="submit">Înregistrează-te</button>
-        </form>
-        <?php if (!empty($msg)): ?>
-            <p style="color: red; text-align: center"><?= htmlspecialchars($msg) ?></p>
-        <?php endif; ?>
-        <a class="back-button" href="login.php">Ai deja cont? Login</a>
-    </main>
+    <div class="register-container">
+        <div class="register-card">
+            <h2 class="title">📝 Înregistrare</h2>
+            <form method="POST">
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" required>
+
+                <label for="password">Parolă:</label>
+                <input type="password" name="password" required>
+
+                <button type="submit">Creează cont</button>
+            </form>
+
+            <?php if (!empty($msg)): ?>
+                <p class="error-msg"><?= htmlspecialchars($msg) ?></p>
+            <?php endif; ?>
+
+            <a class="secondary-link" href="login.php">Ai deja cont? Autentifică-te</a>
+        </div>
+    </div>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-/* ========== REZETARE ========== */
+
 * {
     margin: 0;
     padding: 0;
@@ -7,17 +7,17 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #f4f7fa;
+    background-color: #eef7ef;
     color: #2c3e50;
     min-height: 100vh;
 }
 
-/* NAVBAR */
+
 .navbar {
-    background-color: #0B0F19;
+    background-color: #102e14;
     color: #fff;
     padding: 15px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container {
@@ -31,10 +31,12 @@ body {
 
 .logo {
     font-size: 20px;
-    color: #619DF1;
+    color: #52b96d;
+    font-weight: bold;
 }
 
-.nav-links a, .welcome {
+.nav-links a,
+.welcome {
     color: #fff;
     margin-left: 20px;
     text-decoration: none;
@@ -43,38 +45,34 @@ body {
 }
 
 .nav-links a:hover {
-    color: #7CABF4;
+    color: #a8f0bb;
 }
 
-/* ========== CONTAINER CENTRAL ========== */
+
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 40px auto;
-    padding: 30px 25px;
+    padding: 30px;
     background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
 
-/* ========== TITLU SECȚIUNE ========== */
+
 .section-title {
-    font-size: 26px;
-    margin-bottom: 30px;
+    font-size: 28px;
+    margin-bottom: 25px;
     text-align: center;
-    color: #0B0F19;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    color: #1d482a;
 }
 
-/* ========== FORMULAR INPUTURI ========== */
+
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: 600;
     font-size: 14px;
+    color: #1d482a;
 }
 
 input[type="number"],
@@ -85,65 +83,50 @@ select {
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 14px;
-    background-color: #fefefe;
+    background-color: #fdfdfd;
     transition: border-color 0.2s ease;
 }
 
 input[type="number"]:focus,
 select:focus {
-    border-color: #619DF1;
+    border-color: #52b96d;
     outline: none;
 }
 
-/* ========== BUTON GENERARE ========== */
-button[type="submit"] {
-    background-color: #619DF1;
+
+button[type="submit"],
+#saveBtn,
+#loadBtn {
+    background-color: #52b96d;
     color: #fff;
     border: none;
-    padding: 12px 24px;
+    padding: 12px 22px;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #7CABF4;
-    transform: translateY(-1px);
-}
-
-#saveBtn, #loadBtn {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    padding: 10px 16px;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 5px;
     margin-right: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+#saveBtn:hover:not(:disabled),
+#loadBtn:hover:not(:disabled) {
+    background-color: #66cc80;
+    transform: translateY(-1px);
 }
 
 #saveBtn:disabled,
 #loadBtn:disabled {
-    background-color: #cccccc;
+    background-color: #ccc;
     cursor: not-allowed;
 }
 
-#saveBtn:hover:not(:disabled),
-#loadBtn:hover:not(:disabled) {
-    background-color: #005f73;
-}
 
-
-
-/* ========== BUTON ÎNAPOI ========== */
 .back-button {
     display: inline-block;
-    margin-top: 20px;
-    background-color: #2c3e50;
+    margin-top: 25px;
+    background-color: #1d482a;
     color: #fff;
     text-decoration: none;
     padding: 12px 20px;
@@ -153,62 +136,55 @@ button[type="submit"]:hover {
 }
 
 .back-button:hover {
-    background-color: #1f2d3a;
+    background-color: #163d22;
 }
 
-/* ========== LISTA MUCHII ========== */
+
 #result {
+    margin-top: 30px;
     overflow-x: auto;
     text-align: center;
-  }
-
-#result ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 10px;
-}
-
-#result ul li {
-    padding: 5px 0;
     font-family: monospace;
     font-size: 14px;
+    color: #2c3e50;
 }
 
-/* ========== SVG CANVAS ========== */
+#result div {
+    margin: 5px 0;
+}
+
+
 svg {
     width: 100%;
     max-width: 600px;
     height: auto;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    margin-top: 30px;
+    margin: 30px auto 0;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* NODURI GRAF */
 circle {
-    fill: #619DF1;
+    fill: #52b96d;
     stroke: #fff;
     stroke-width: 2;
     transition: fill 0.2s ease;
 }
 
 circle:hover {
-    fill: #7CABF4;
+    fill: #66cc80;
 }
 
-/* MUCHII GRAF */
+
 line {
-    stroke: #34495e;
+    stroke: #1d482a;
     stroke-width: 2;
     opacity: 0.9;
 }
 
-/* TEXT ETICHETE PE NODURI */
+
 text {
     fill: #fff;
     font-weight: bold;

@@ -4,49 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aplicație pentru generarea de date pentru informatică.">
-    <title>Generator de Date</title>
+    <title>🌿 Generator Informatică</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-
-    <nav class="navbar">
-        <div class="navbar-container">
-            <h1 class="logo">🧮 Generator Informatica</h1>
-            <div class="nav-links">
+    <!-- HEADER / HERO -->
+    <header class="hero">
+        <div class="overlay">
+            <h1 class="hero-title">🌿 Generator de Date pentru Informatică</h1>
+            <p class="hero-subtitle">Generează rapid șiruri, matrici, grafuri și stringuri pentru testare!</p>
+            <div class="hero-actions">
                 <?php if (isset($_SESSION['user'])): ?>
-                    <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
-                    <a href="auth/logout.php">Delogare</a>
+                    <span class="welcome">👋 Salut, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
+                    <a href="auth/logout.php" class="btn">Delogare</a>
+                    <a href="admin/admin_users.php" id="adminLink" class="btn hidden">Admin Panel</a>
                 <?php else: ?>
-                    <a href="auth/login.php">Autentificare</a>
-                    <a href="auth/register.php">Înregistrare</a>
+                    <a href="auth/login.php" class="btn">Autentificare</a>
+                    <a href="auth/register.php" class="btn">Înregistrare</a>
                 <?php endif; ?>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="container">
-        <h2 class="section-title">Ce tip de date vrei să generezi?</h2>
-        <div class="card-container">
-            <a class="card-box" href="modules/arrays.php">
-                <h3>🔢 Șiruri de numere</h3>
-                <p>Generează șiruri cu valori random, sortate sau personalizate.</p>
+    <!-- MODUL SELECTOR -->
+    <main class="modules-section">
+        <h2 class="section-title">Alege un modul:</h2>
+        <div class="modules-grid">
+            <a href="modules/arrays.php" class="module-card">
+                <h3>🔢 Șiruri</h3>
+                <p>Valori random, crescătoare sau descrescătoare.</p>
             </a>
-            <a class="card-box" href="modules/matrices.php">
+            <a href="modules/matrices.php" class="module-card">
                 <h3>🔲 Matrici</h3>
-                <p>Matrici pentru testare: umplere, parcurgere, hartă etc.</p>
+                <p>Umpleri, hărți, generare aleatorie și personalizată.</p>
             </a>
-            <a class="card-box" href="modules/strings.php">
-                <h3>🔤 Șiruri de caractere</h3>
-                <p>Testează algoritmi pe stringuri generate automat.</p>
+            <a href="modules/strings.php" class="module-card">
+                <h3>🔤 Stringuri</h3>
+                <p>Testează algoritmi de manipulare stringuri.</p>
             </a>
-            <a class="card-box" href="modules/graphs.php">
+            <a href="modules/graphs.php" class="module-card">
                 <h3>🕸️ Grafuri / Arbori</h3>
-                <p>Grafuri conexe, bipartite, orientate sau neorientate.</p>
+                <p>Conexe, orientate, bipartite, reprezentare SVG.</p>
             </a>
         </div>
     </main>
 
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; <?= date("Y") ?> Generator Informatica. Creat cu ❤️.</p>
+    </footer>
+
+    <?php if (isset($_SESSION['token'])): ?>
+        <script>
+            const token = '<?= $_SESSION['token'] ?>';
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                if (payload.role === 'admin') {
+                    document.getElementById('adminLink').classList.remove('hidden');
+                }
+            } catch (e) {
+                console.warn("Token JWT invalid.");
+            }
+        </script>
+    <?php endif; ?>
 </body>
 </html>

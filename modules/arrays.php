@@ -23,45 +23,46 @@
         </div>
     </nav>
 
-    <div class="container">
-        <h2 class="section-title">🔢 Generator Șiruri de Numere</h2>
+    <div class="array-generator-card">
+        <h2>🔢 Generator Șiruri de Numere</h2>
 
         <form id="sirForm">
-            <label>Lungime:</label>
-            <input type="number" name="length" min="1" max="1000" required><br><br>
+            <label for="length">Lungime:</label>
+            <input type="number" name="length" min="1" max="1000" required>
 
             <label>Valoare minimă:</label>
-            <input type="number" name="min" min="-1000000" max="1000000"><br><br>
+            <input type="number" name="min" min="-1000000" max="1000000">
 
             <label>Valoare maximă:</label>
-            <input type="number" name="max" min="-1000000" max="1000000"><br><br>
+            <input type="number" name="max" min="-1000000" max="1000000">
 
             <label>Sortare:</label>
             <select name="order">
                 <option value="none">Fără</option>
                 <option value="asc">Crescător</option>
                 <option value="desc">Descrescător</option>
-            </select><br><br>
-
-            <button type="submit">Generează</button>
-            <br><br>
-
-            <button id="saveBtn" type="button" disabled>Salvare</button>
-            <br><br>
-            <select id="savedLists">
-                <option value="">-- Încarcă un șir salvat --</option>
             </select>
 
-            <button id="loadBtn" type="button" disabled>Încarcă</button>
+            <button type="submit" class="primary-btn">Generează</button>
+
+            <div class="button-group">
+                <button id="saveBtn" type="button" disabled>💾 Salvează</button>
+                <button id="loadBtn" type="button" disabled>📥 Încarcă</button>
+            </div>
+
+            <select id="savedLists">
+                <option value="">-- Alege un șir salvat --</option>
+            </select>
         </form>
-        <a href="../index.php" class="back-button">← Înapoi la pagina principală</a>
-        <div id="result" style="margin-top:20px;"></div>
+
+        <div id="result" class="result-box"></div>
+
+        <a href="../index.php" class="back-button">⬅ Înapoi la pagina principală</a>
     </div>
 
     <script>
         let currentArray = [];
 
-        // generare
         document.getElementById('sirForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -75,34 +76,30 @@
                 if (data.array) {
                     currentArray = data.array;
                     document.getElementById('result').innerHTML =
-                        "<strong>Șir generat:</strong><br>" + currentArray.join(', ');
+                        "<strong>Șir generat:</strong><br><code>" + currentArray.join(', ') + "</code>";
                     document.getElementById('saveBtn').disabled = false;
                 } else {
                     document.getElementById('result').textContent = "Eroare la generare.";
                 }
-            })
-            .catch(err => {
-                document.getElementById('result').textContent = "Eroare: " + err;
             });
         });
 
         function fetchSaved() {
-        fetch('../api/array/list_saved_arrays.php')
+            fetch('../api/array/list_saved_arrays.php')
             .then(r => r.json())
             .then(data => {
-            const sel = document.getElementById('savedLists');
-            sel.innerHTML = '<option value="">-- Încarcă un șir salvat --</option>';
-            data.forEach(item => {
-                const o = document.createElement('option');
-                o.value = item.id;
-                o.textContent = item.title;
-                sel.append(o);
-            });
-            document.getElementById('loadBtn').disabled = true;
+                const sel = document.getElementById('savedLists');
+                sel.innerHTML = '<option value="">-- Alege un șir salvat --</option>';
+                data.forEach(item => {
+                    const o = document.createElement('option');
+                    o.value = item.id;
+                    o.textContent = item.title;
+                    sel.append(o);
+                });
+                document.getElementById('loadBtn').disabled = true;
             });
         }
 
-        // salvare
         document.getElementById('saveBtn').addEventListener('click', () => {
             const title = prompt('Titlu pentru acest șir:');
             if (!title) return;
@@ -118,12 +115,10 @@
             });
         });
 
-        // lista de incarcari
         document.getElementById('savedLists').addEventListener('change', e => {
             document.getElementById('loadBtn').disabled = !e.target.value;
         });
 
-        // incarcare
         document.getElementById('loadBtn').addEventListener('click', () => {
             const id = document.getElementById('savedLists').value;
             fetch(`../api/array/load_array.php?id=${id}`)
@@ -132,7 +127,7 @@
                 if (data.error) return alert(data.error);
                 currentArray = data.array;
                 document.getElementById('result').innerHTML =
-                    "<strong>Șir încărcat:</strong><br>" + currentArray.join(', ');
+                    "<strong>Șir încărcat:</strong><br><code>" + currentArray.join(', ') + "</code>";
                 document.getElementById('saveBtn').disabled = false;
             });
         });

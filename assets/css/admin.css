@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f1fdf2;
+    color: #1c2b2d;
+    min-height: 100vh;
+}
+
+.admin-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+
+.admin-title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #2f7d32;
+    font-weight: 700;
+}
+
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    background-color: #2f7d32;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+    background-color: #256b29;
+}
+
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: fixed;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+.admin-table th {
+    background-color: #2f7d32;
+    color: white;
+    font-weight: bold;
+}
+
+
+select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+}
+
+
+.btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn.green { background-color: #27ae60; }
+.btn.green:hover { background-color: #1e8449; }
+
+.btn.yellow { background-color: #f39c12; }
+.btn.yellow:hover { background-color: #e67e22; }
+
+.btn.red { background-color: #e74c3c; }
+.btn.red:hover { background-color: #c0392b; }
+
+
+.data-box {
+    background-color: #eef6ff;
+    padding: 10px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #1a3e2e;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+
+table.mini-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: #f2f9ff;
+    border: 1px solid #cce2f0;
+}
+
+table.mini-table td {
+    border: 1px solid #cce2f0;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: #34495e;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.info-message {
+    text-align: center;
+    font-style: italic;
+    color: #2c3e50;
+    padding-top: 20px;
+}

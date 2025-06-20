@@ -1,91 +1,79 @@
-/* Reset și font global */
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #f4f7fa;
-    color: #2c3e50;
-    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #1e5631, #a4de02);
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-/* Card principal */
-.container {
+.register-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     padding: 30px;
-    background-color: #fff;
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Titlu */
-.section-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+.register-card h2.title {
     text-align: center;
-    color: #34495e;
+    color: #1e5631;
+    margin-bottom: 30px;
+    font-size: 26px;
 }
 
-/* Etichete și inputuri */
-label {
+form label {
     display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: 500;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    font-size: 15px;
 }
 
-/* Buton */
-button[type="submit"] {
-    background-color: #619DF1;
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #1e5631;
     color: #fff;
     border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
     font-weight: bold;
-    width: 100%;
-    transition: background-color 0.2s ease;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-    background-color: #7CABF4;
+button:hover {
+    background-color: #145c2f;
 }
 
-/* Mesaje eroare sau succes */
-p {
+.secondary-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #1e5631;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.secondary-link:hover {
+    text-decoration: underline;
+}
+
+.error-msg {
+    color: #c0392b;
+    font-weight: bold;
     text-align: center;
     margin-top: 10px;
-    color: red;
-}
-
-/* Link login */
-.back-button {
-    display: block;
-    margin-top: 20px;
-    text-align: center;
-    color: #34495e;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s ease;
-}
-
-.back-button:hover {
-    color: #2c3e50;
 }
