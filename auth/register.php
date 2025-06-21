@@ -1,58 +1,4 @@
-<?php
-session_start();
-require_once 'db.php';
-require_once 'jwt_utils.php';
-
-$msg = "";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = trim($_POST['username'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = trim($_POST['password'] ?? '');
-
-    if (!$username || !$email || !$password) {
-        $msg = "Toate câmpurile sunt obligatorii.";
-    } else {
-        try {
-            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
-            $stmt->execute([$email, $username]);
-
-            if ($stmt->fetch()) {
-                $msg = "Emailul sau username-ul există deja.";
-            } else {
-                $count = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
-                $role = ($count == 0) ? 'admin' : 'user';
-
-                $hash = password_hash($password, PASSWORD_DEFAULT);
-                $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)");
-                $stmt->execute([$username, $email, $hash, $role]);
-
-                // obtine user nou inregistrat
-                $userId = $pdo->lastInsertId();
-
-                $token = generate_jwt([
-                    'sub' => $userId,
-                    'username' => $username,
-                    'email' => $email,
-                    'role' => $role
-                ]);
-
-                //seteaza in sesiune
-                $_SESSION['user'] = $username;
-                $_SESSION['user_id'] = $userId;
-                $_SESSION['role'] = $role;
-                $_SESSION['token'] = $token;
-
-                header("Location: ../index.php");
-                exit;
-            }
-        } catch (Exception $e) {
-            $msg = "Eroare server: " . $e->getMessage();
-        }
-    }
-}
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -64,26 +10,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="register-container">
         <div class="register-card">
             <h2 class="title">📝 Înregistrare</h2>
-            <form method="POST">
+            <form id="registerForm">
                 <label for="username">Username:</label>
-                <input type="text" name="username" required>
+                <input type="text" name="username" id="username" required>
 
                 <label for="email">Email:</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" id="email" required>
 
                 <label for="password">Parolă:</label>
-                <input type="password" name="password" required>
+                <input type="password" name="password" id="password" required>
 
                 <button type="submit">Creează cont</button>
             </form>
 
-            <?php if (!empty($msg)): ?>
-                <p class="error-msg"><?= htmlspecialchars($msg) ?></p>
-            <?php endif; ?>
+            <p class="error-msg" id="errorMsg" style="display:none;"></p>
 
             <a class="secondary-link" href="login.php">Ai deja cont? Autentifică-te</a>
         </div>
     </div>
+
+    <script>
+    document.getElementById("registerForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        const errorMsg = document.getElementById("errorMsg");
+        errorMsg.style.display = "none";
+
+        try {
+            const res = await fetch('../api/auth/register_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, email, password })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                window.location.href = data.redirect;
+            } else {
+                errorMsg.textContent = data.error || "Eroare necunoscută.";
+                errorMsg.style.display = "block";
+            }
+        } catch (err) {
+            errorMsg.textContent = "Eroare la conectare cu serverul.";
+            errorMsg.style.display = "block";
+        }
+    });
+    </script>
 </body>
 </html>
-
