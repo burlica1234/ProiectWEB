@@ -14,6 +14,7 @@ header('Content-Type: application/json');
 
 $token = get_bearer_token();
 $payload = verify_jwt($token);
+
 if (!$payload || $payload->role !== 'admin') {
     http_response_code(403);
     echo json_encode(["error" => "Access denied"]);
@@ -33,5 +34,13 @@ if (!$user_id || !$new_password) {
 $hash = password_hash($new_password, PASSWORD_DEFAULT);
 $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
 $stmt->execute([$hash, $user_id]);
+
+
+if ((int)$user_id === (int)$payload->sub) {
+    session_start();
+    session_destroy();
+    echo json_encode(["success" => true, "selfReset" => true]);
+    exit;
+}
 
 echo json_encode(["success" => true]);

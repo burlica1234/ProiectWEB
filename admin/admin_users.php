@@ -24,7 +24,7 @@ $token = $_SESSION['token'];
             tbody.innerHTML = '';
 
             if (!Array.isArray(users)) {
-                tbody.innerHTML = '<tr><td colspan="6">Eroare: nu s-au putut încărca utilizatorii.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5">Eroare: nu s-au putut încărca utilizatorii.</td></tr>';
                 return;
             }
 
@@ -40,7 +40,6 @@ $token = $_SESSION['token'];
                         </select>
                     </td>
                     <td>
-                        <a href="admin_user_data.php?id=${user.id}" class="btn green">Date</a>
                         <button onclick="resetPassword(${user.id})" class="btn yellow">Reset</button>
                         <button onclick="deleteUser(${user.id})" class="btn red">Șterge</button>
                     </td>
@@ -105,6 +104,10 @@ $token = $_SESSION['token'];
 
             if (result.success) {
                 alert("Parola a fost resetată cu succes!");
+                if (result.selfReset) {
+                    alert("Ți-ai resetat propria parolă. Vei fi delogat.");
+                    window.location.href = '../auth/logout.php';
+                }
             } else {
                 alert("Eroare la resetare: " + result.error);
             }

@@ -65,21 +65,26 @@ try {
                                     <?php
                                         $decoded = json_decode($row['data_json'], true);
                                         if (is_array($decoded)) {
-                                            if (is_array($decoded[0])) {
+                                            if (!empty($decoded) && is_array(reset($decoded))) {
+                                                // Matrice (ex: muchii, matrice adiacență)
                                                 echo '<table class="mini-table">';
                                                 foreach ($decoded as $inner) {
                                                     echo '<tr>';
                                                     foreach ($inner as $val) {
-                                                        echo '<td>' . htmlspecialchars($val) . '</td>';
+                                                        echo '<td>' . htmlspecialchars((string)$val) . '</td>';
                                                     }
                                                     echo '</tr>';
                                                 }
                                                 echo '</table>';
                                             } else {
-                                                echo implode(', ', array_map('htmlspecialchars', $decoded));
+                                                // Vector simplu (ex: vectori de tați)
+                                                $safe = array_map(function($v) {
+                                                    return is_scalar($v) ? htmlspecialchars((string)$v) : '[non-scalar]';
+                                                }, $decoded);
+                                                echo implode(', ', $safe);
                                             }
                                         } else {
-                                            echo htmlspecialchars($row['data_json']);
+                                            echo htmlspecialchars((string)$row['data_json']);
                                         }
                                     ?>
                                 </div>

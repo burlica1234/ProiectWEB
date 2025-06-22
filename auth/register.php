@@ -9,7 +9,7 @@
 <body>
     <div class="register-container">
         <div class="register-card">
-            <h2 class="title">📝 Înregistrare</h2>
+            <h2 class="title"> Înregistrare</h2>
             <form id="registerForm">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" required>

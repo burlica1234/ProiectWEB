@@ -9,7 +9,7 @@
 <body>
     <div class="login-container">
         <div class="login-card">
-            <h2 class="title">🔒 Autentificare</h2>
+            <h2 class="title"> Autentificare</h2>
             <form id="loginForm">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" required>
