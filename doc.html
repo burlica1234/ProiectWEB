@@ -152,51 +152,28 @@
 <section>
 <h2>8. Arhitectura Sistemului - Model C4</h2>
 <h3>Nivelul 1 - Context</h3>
-<p>Utilizatorii (anonimi sau autentificați) interacționează cu aplicația PHP. Backend-ul interacționează cu o bază de date MySQL.</p>
-<pre><code>@startuml C4_Context
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-
-Person(user, "Utilizator", "Folosește aplicația pentru a genera și gestiona structuri de date")
-System(webapp, "Aplicația Web PHP", "Aplicație pentru matrici, grafuri, șiruri și tablouri")
-System_Ext(mysql, "MySQL", "Stochează utilizatori și date")
-
-Rel(user, webapp, "Interacționează prin interfața web")
-Rel(webapp, mysql, "Citește/Scrie date")
-@enduml</code></pre>
+<p>Reprezintă interacțiunea dintre utilizator și aplicație, precum și legătura cu sistemul de baze de date. Este o privire de ansamblu asupra ecosistemului aplicației.</p>
+<div class="diagram">
+    <img src="assets/img/diagrama1.png" alt="Diagrama C4 - Context">
+</div>
 
 <h3>Nivelul 2 - Containere</h3>
-<pre><code>@startuml C4_Containers
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-
-Person(user, "Utilizator")
-
-System_Boundary(c1, "Aplicația Web PHP") {
-  Container(frontend, "Frontend", "HTML/CSS/JS", "Interfață utilizator")
-  Container(backend, "Backend", "PHP", "Logica aplicației și API-uri")
-  ContainerDb(db, "MySQL", "Bază de date", "Persistă utilizatori și date generate")
-}
-
-Rel(user, frontend, "Utilizează prin browser")
-Rel(frontend, backend, "Trimite cereri HTTP")
-Rel(backend, db, "Interacționează prin PDO")
-@enduml</code></pre>
+<p>Detaliază componentele software majore (frontend, backend, baza de date) și modul în care acestea comunică între ele. Această viziune ajută la înțelegerea structurii logice a aplicației.</p>
+<div class="diagram">
+    <img src="assets/img/diagrama2.png" alt="Diagrama C4 - Containere">
+</div>
 
 <h3>Nivelul 3 - Componente</h3>
-<pre><code>@startuml C4_Components
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+<p>Prezintă organizarea codului backend în module funcționale precum autentificare, administrare sau manipulare date, clarificând responsabilitățile fiecărui fișier principal.</p>
+<div class="diagram">
+    <img src="assets/img/diagrama3.png" alt="Diagrama C4 - Componente">
+</div>
 
-Container(backend, "Backend PHP", "PHP", "Conține logica aplicației și API-urile")
-
-Component(auth, "Autentificare", "login_api.php, register_api.php", "Înregistrare și autentificare cu JWT")
-Component(ui, "Interfață Module", "graphs.php, arrays.php, strings.php, matrices.php", "Pagini pentru manipulare structuri")
-Component(storage, "Manipulare date", "save_*.php, load_*.php, delete_*.php", "Salvare și încărcare date în MySQL")
-Component(admin, "Administrare utilizatori", "admin_users.php, change_role.php, reset_password.php", "Gestionare utilizatori")
-
-Rel(auth, storage, "Validează utilizatorul pentru acces la date")
-Rel(ui, storage, "Trimite cereri de salvare/încărcare")
-Rel(admin, storage, "Accesează și modifică date administrative")
-Rel(admin, auth, "Verifică și modifică conturi")
-@enduml</code></pre>
+<h3>Nivelul 4 - Cod</h3>
+<p>Ilustrează în detaliu interacțiunea la nivel de cod sursă dintre utilizator, fișierele PHP, conexiunea la baza de date și fluxul intern de date. Această diagramă este utilă pentru înțelegerea logicii de execuție pas cu pas.</p>
+<div class="diagram">
+    <img src="assets/img/diagrama4.png" alt="Diagrama C4 - Cod">
+</div>
 </section>
 
 <section>
