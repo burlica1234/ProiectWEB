@@ -27,7 +27,7 @@
         <h2> Generator Șiruri de Numere</h2>
 
         <form id="sirForm">
-            <label for="length">Lungime:</label>
+            <label>Lungime:</label>
             <input type="number" name="length" min="1" max="1000" required>
 
             <label>Valoare minimă:</label>
