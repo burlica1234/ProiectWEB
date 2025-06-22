@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌿 Generator Informatică</title>
+    <title> Generator Informatică</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
 
@@ -16,11 +16,11 @@
     <!-- HEADER / HERO -->
     <header class="hero">
         <div class="overlay">
-            <h1 class="hero-title">🌿 Generator de Date pentru Informatică</h1>
+            <h1 class="hero-title"> Generator de Date pentru Informatică</h1>
             <p class="hero-subtitle">Generează rapid șiruri, matrici, grafuri și stringuri pentru testare!</p>
             <div class="hero-actions">
                 <?php if (isset($_SESSION['user'])): ?>
-                    <span class="welcome">👋 Salut, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
+                    <span class="welcome"> Salut, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
                     <a href="auth/logout.php" class="btn">Delogare</a>
                     <a href="admin/admin_users.php" id="adminLink" class="btn hidden">Admin Panel</a>
                 <?php else: ?>
@@ -36,19 +36,19 @@
         <h2 class="section-title">Alege un modul:</h2>
         <div class="modules-grid">
             <a href="modules/arrays.php" class="module-card">
-                <h3>🔢 Șiruri</h3>
+                <h3> Șiruri</h3>
                 <p>Valori random, crescătoare sau descrescătoare.</p>
             </a>
             <a href="modules/matrices.php" class="module-card">
-                <h3>🔲 Matrici</h3>
+                <h3> Matrici</h3>
                 <p>Umpleri, hărți, generare aleatorie și personalizată.</p>
             </a>
             <a href="modules/strings.php" class="module-card">
-                <h3>🔤 Stringuri</h3>
+                <h3> Stringuri</h3>
                 <p>Testează algoritmi de manipulare stringuri.</p>
             </a>
             <a href="modules/graphs.php" class="module-card">
-                <h3>🕸️ Grafuri / Arbori</h3>
+                <h3> Grafuri / Arbori</h3>
                 <p>Conexe, orientate, bipartite, reprezentare SVG.</p>
             </a>
         </div>
@@ -56,7 +56,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; <?= date("Y") ?> Generator Informatica. Creat cu ❤️.</p>
+        <p>&copy; <?= date("Y") ?> Generator Informatica.</p>
     </footer>
 
     <script>

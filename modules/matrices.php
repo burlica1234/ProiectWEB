@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar">
     <div class="navbar-container">
-        <h1 class="logo">🧮 Generator Informatica</h1>
+        <h1 class="logo"> Generator Informatica</h1>
         <div class="nav-links">
             <?php if (isset($_SESSION['user'])): ?>
                 <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
@@ -24,7 +24,7 @@
 </nav>
 
 <div class="matrix-generator-card">
-    <h2>🔲 Generator Matrici</h2>
+    <h2> Generator Matrici</h2>
 
     <form id="matrixForm">
         <label>Linii:</label>
@@ -51,15 +51,15 @@
         <br><br>
 
         <div class="button-group">
-            <button id="saveBtn" type="button" disabled>💾 Salvează</button>
-            <button id="loadBtn" type="button" disabled>📥 Încarcă</button>
+            <button id="saveBtn" type="button" disabled> Salvează</button>
+            <button id="loadBtn" type="button" disabled> Încarcă</button>
         </div>
         <br><br>
 
         <select id="savedMatrices">
             <option value="">-- Alege o matrice salvată --</option>
         </select>
-        <button id="deleteBtn" type="button" disabled>🗑️ Sterge</button>
+        <button id="deleteBtn" type="button" disabled> Sterge</button>
     </form>
 
     <div id="result" class="result-box">Rezultatul va apărea aici.</div>
@@ -75,6 +75,13 @@
     }
     modeSelect.addEventListener('change', toggleRangeInputs);
     window.addEventListener('DOMContentLoaded', toggleRangeInputs);
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
 
     let currentMatrix = [];
 
@@ -102,11 +109,11 @@
             const fontSize = (1 * scale).toFixed(2) + 'em';
 
             let html = `<div style="overflow:auto; text-align:center;"><table><tr><th></th>` +
-                currentMatrix[0].map((_, j) => `<th>${j}</th>`).join('') + '</tr>';
+                currentMatrix[0].map((_, j) => `<th>${escapeHtml(j)}</th>`).join('') + '</tr>';
 
             currentMatrix.forEach((row, i) => {
                 html += `<tr><th>${i}</th>` + row.map(val =>
-                    `<td style="width:${tdSize}; font-size:${fontSize};">${val}</td>`
+                    `<td style="width:${tdSize}; font-size:${fontSize};">${escapeHtml(val)}</td>`
                 ).join('') + '</tr>';
             });
 
@@ -168,11 +175,11 @@
                 const fontSize = (1 * scale).toFixed(2) + 'em';
 
                 let html = `<div style="overflow:auto; text-align:center;"><table><tr><th></th>` +
-                    currentMatrix[0].map((_, j) => `<th>${j}</th>`).join('') + '</tr>';
+                    currentMatrix[0].map((_, j) => `<th>${escapeHtml(j)}</th>`).join('') + '</tr>';
 
                 currentMatrix.forEach((row, i) => {
                     html += `<tr><th>${i}</th>` + row.map(val =>
-                        `<td style="width:${tdSize}; font-size:${fontSize};">${val}</td>`
+                        `<td style="width:${tdSize}; font-size:${fontSize};">${escapeHtml(val)}</td>`
                     ).join('') + '</tr>';
                 });
 

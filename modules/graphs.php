@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <h1 class="logo">🧮 Generator Informatica</h1>
+            <h1 class="logo"> Generator Informatica</h1>
             <div class="nav-links">
                 <?php if (isset($_SESSION['user'])): ?>
                     <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
@@ -24,7 +24,7 @@
     </nav>
 
     <div class="container">
-        <h2 class="section-title">🕸️ Generator Grafuri / Arbori</h2>
+        <h2 class="section-title"> Generator Grafuri / Arbori</h2>
 
         <form id="graphForm">
             <label for="nodes">Număr noduri:</label>
@@ -61,9 +61,9 @@
             <br><br>
             
             <div class="button-group">
-                <button id="saveBtn" type="button" disabled>💾 Salvează</button>
-                <button id="loadBtn" type="button" disabled>📥 Încarcă</button>
-                <button id="deleteBtn" type="button" disabled>🗑️ Sterge</button>
+                <button id="saveBtn" type="button" disabled> Salvează</button>
+                <button id="loadBtn" type="button" disabled> Încarcă</button>
+                <button id="deleteBtn" type="button" disabled> Sterge</button>
             </div>
             <br><br>
 
@@ -105,6 +105,13 @@
     </div>
 
     <script>
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         let currentGraph = {};
 
         function renderGraph(graphData, meta) {
@@ -155,13 +162,13 @@
                             <strong>Matrice de adiacenta:</strong><br>
                             <table style="margin:0 auto; table-layout:fixed; border-collapse:collapse;">
                             <tr><th style="width:${tdSize}; font-size:${fontSize}; border:1px solid #333;"></th>` +
-                            matrix[0].map((_, j) => `<th style="width:${tdSize}; font-size:${fontSize}; border:1px solid #333;">${j}</th>`).join('') +
+                            matrix[0].map((_, j) => `<th style="width:${tdSize}; font-size:${fontSize}; border:1px solid #333;">${escapeHtml(j)}</th>`).join('') +
                             '</tr>';
 
                 matrix.forEach((row, i) => {
-                    html += `<tr><th style="width:${tdSize}; font-size:${fontSize}; border:1px solid #333;">${i}</th>` +
+                    html += `<tr><th style="width:${tdSize}; font-size:${fontSize}; border:1px solid #333;">${escapeHtml(i)}</th>` +
                             row.map(val =>
-                                `<td style="width:${tdSize}; padding:3px; font-size:${fontSize}; border:1px solid #333;">${val}</td>`
+                                `<td style="width:${tdSize}; padding:3px; font-size:${fontSize}; border:1px solid #333;">${escapeHtml(val)}</td>`
                             ).join('') +
                             '</tr>';
                 });
@@ -176,9 +183,9 @@
                 parents.forEach((p, i) => {
                     const col = Math.floor(i / perCol);
                     if (p === -1)
-                        cols[col] += `<div>radacina ${i}</div>`;
+                        cols[col] += `<div>radacina ${escapeHtml(i)}</div>`;
                     else
-                        cols[col] += `<div>nod ${i} → tata ${p}</div>`;
+                        cols[col] += `<div>nod ${escapeHtml(i)} → tata ${escapeHtml(p)}</div>`;
                 });
 
                 result.innerHTML = `
@@ -194,7 +201,7 @@
 
                 edges.forEach((e, i) => {
                     const colIndex = Math.floor(i / edgesPerCol);
-                    columnsHtml[colIndex] += `<div>${e[0]} ${isDirected ? '→' : '-'} ${e[1]}</div>`;
+                    columnsHtml[colIndex] += `<div>${escapeHtml(e[0])} ${isDirected ? '→' : '-'} ${escapeHtml(e[1])}</div>`;
                 });
 
                 result.innerHTML = `

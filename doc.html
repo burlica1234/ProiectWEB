@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentație Tehnică - Aplicație Web PHP: Matrici, Grafuri, Șiruri</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 1em 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-bottom: 2.5em;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        .diagram {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body typeof="schema:ScholarlyArticle">
+<main>
+<article>
+<header>
+<h1>Documentație Tehnică: Aplicație Web pentru Managementul Matricilor, Grafurilor, Șirurilor și Tablourilor</h1>
+</header>
+
+<section>
+<h2>1. Introducere</h2>
+<p>Proiectul este o aplicație web dezvoltată în PHP care oferă utilizatorilor posibilitatea de a genera, salva, încărca și șterge structuri de date precum: matrici, grafuri, șiruri de caractere și tablouri (arrays). Interfața web este modernă, cu accent pe nuanțe de verde, iar aplicația include autentificare, roluri și un panou de administrare.</p>
+</section>
+
+<section>
+<h2>2. Arhitectură Generală</h2>
+<ul>
+    <li><strong>Frontend:</strong> HTML + CSS (fișiere dedicate pentru fiecare modul, stil unificat verde)</li>
+    <li><strong>Backend:</strong> PHP procedural (fără framework), cu module distincte pentru fiecare funcționalitate</li>
+    <li><strong>Persistență:</strong> MySQL (bază de date cu două tabele: <code>users</code> și <code>generated_data</code>)</li>
+    <li><strong>Autentificare:</strong> JWT transmis în headerul <code>Authorization</code> fără utilizarea cookie-urilor</li>
+</ul>
+</section>
+
+<section>
+<h2>3. Funcționalități</h2>
+<h3>3.1 Autentificare și înregistrare</h3>
+<ul>
+    <li>Utilizatorii se pot înregistra cu username, email și parolă</li>
+    <li>Parola este criptată cu <code>password_hash()</code></li>
+    <li>Autentificarea generează un JWT</li>
+    <li>Tokenul JWT este transmis ulterior în headerul HTTP <code>Authorization: Bearer &lt;token&gt;</code></li>
+</ul>
+
+<h3>3.2 Module funcționale</h3>
+<ul>
+    <li><strong>Matrici:</strong> generare aleatorie, salvare, încărcare, ștergere</li>
+    <li><strong>Grafuri:</strong> definire prin vector de tați, muchii sau matrice de adiacență + SVG</li>
+    <li><strong>Șiruri:</strong> generare, salvare, ștergere, afișare în cod HTML</li>
+    <li><strong>Tablouri (arrays):</strong> funcționalități similare cu matricile</li>
+</ul>
+</section>
+
+<section>
+<h2>4. Panou de Administrare</h2>
+<p>Administratorii pot:</p>
+<ul>
+    <li>Vizualiza toți utilizatorii</li>
+    <li>Schimba roluri (user/admin)</li>
+    <li>Reseta parole</li>
+    <li>Accesa datele salvate de utilizatori</li>
+</ul>
+</section>
+
+<section>
+<h2>5. Interfață</h2>
+<ul>
+    <li>Design modern și coerent cu temă verde (vezi <code>style.css</code>, <code>admin.css</code>, etc.)</li>
+    <li>Fiecare modul are o interfață distinctă și intuitivă</li>
+    <li>Interacțiuni asincrone minime, în general paginile sunt server-rendered</li>
+</ul>
+</section>
+
+<section>
+<h2>6. Baza de date</h2>
+<ul>
+    <li><code>users</code>: id, username, email, parola, rol</li>
+    <li><code>generated_data</code>: id, user_id, titlu, data_type, data_json, created_at</li>
+</ul>
+<p>Tipurile acceptate: <code>matrix</code>, <code>string</code>, <code>graph</code>, <code>array</code></p>
+</section>
+
+<section>
+<h2>7. Securitate</h2>
+<ul>
+    <li>Parolele sunt criptate</li>
+    <li>Accesul la date este restricționat pe baza rolului</li>
+    <li>Utilizatorii nu pot accesa datele altora</li>
+    <li>Toate interogările folosesc PDO + prepared statements</li>
+</ul>
+</section>
+
+<section>
+<h2>8. Arhitectura Sistemului - Model C4</h2>
+<h3>Nivelul 1 - Context</h3>
+<p>Utilizatorii (anonimi sau autentificați) interacționează cu aplicația PHP. Backend-ul interacționează cu o bază de date MySQL.</p>
+<pre><code>@startuml C4_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Utilizator", "Folosește aplicația pentru a genera și gestiona structuri de date")
+System(webapp, "Aplicația Web PHP", "Aplicație pentru matrici, grafuri, șiruri și tablouri")
+System_Ext(mysql, "MySQL", "Stochează utilizatori și date")
+
+Rel(user, webapp, "Interacționează prin interfața web")
+Rel(webapp, mysql, "Citește/Scrie date")
+@enduml</code></pre>
+
+<h3>Nivelul 2 - Containere</h3>
+<pre><code>@startuml C4_Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "Utilizator")
+
+System_Boundary(c1, "Aplicația Web PHP") {
+  Container(frontend, "Frontend", "HTML/CSS/JS", "Interfață utilizator")
+  Container(backend, "Backend", "PHP", "Logica aplicației și API-uri")
+  ContainerDb(db, "MySQL", "Bază de date", "Persistă utilizatori și date generate")
+}
+
+Rel(user, frontend, "Utilizează prin browser")
+Rel(frontend, backend, "Trimite cereri HTTP")
+Rel(backend, db, "Interacționează prin PDO")
+@enduml</code></pre>
+
+<h3>Nivelul 3 - Componente</h3>
+<pre><code>@startuml C4_Components
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container(backend, "Backend PHP", "PHP", "Conține logica aplicației și API-urile")
+
+Component(auth, "Autentificare", "login_api.php, register_api.php", "Înregistrare și autentificare cu JWT")
+Component(ui, "Interfață Module", "graphs.php, arrays.php, strings.php, matrices.php", "Pagini pentru manipulare structuri")
+Component(storage, "Manipulare date", "save_*.php, load_*.php, delete_*.php", "Salvare și încărcare date în MySQL")
+Component(admin, "Administrare utilizatori", "admin_users.php, change_role.php, reset_password.php", "Gestionare utilizatori")
+
+Rel(auth, storage, "Validează utilizatorul pentru acces la date")
+Rel(ui, storage, "Trimite cereri de salvare/încărcare")
+Rel(admin, storage, "Accesează și modifică date administrative")
+Rel(admin, auth, "Verifică și modifică conturi")
+@enduml</code></pre>
+</section>
+
+<section>
+<h2>9. Concluzii</h2>
+<p>Aplicația oferă o platformă educațională utilă pentru a înțelege și manipula structuri de date în mod vizual și persistent. Este ușor extensibilă și oferă o separare clară între componentele aplicației.</p>
+</section>
+
+</article>
+</main>
+</body>
+
+</html>

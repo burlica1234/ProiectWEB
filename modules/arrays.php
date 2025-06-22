@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <h1 class="logo">🧮 Generator Informatica</h1>
+            <h1 class="logo"> Generator Informatica</h1>
             <div class="nav-links">
                 <?php if (isset($_SESSION['user'])): ?>
                     <span class="welcome">Bine ai venit, <?= htmlspecialchars($_SESSION['user']) ?>!</span>
@@ -24,7 +24,7 @@
     </nav>
 
     <div class="array-generator-card">
-        <h2>🔢 Generator Șiruri de Numere</h2>
+        <h2> Generator Șiruri de Numere</h2>
 
         <form id="sirForm">
             <label for="length">Lungime:</label>
@@ -46,15 +46,15 @@
             <button type="submit" class="primary-btn">Generează</button>
 
             <div class="button-group">
-                <button id="saveBtn" type="button" disabled>💾 Salvează</button>
-                <button id="loadBtn" type="button" disabled>📥 Încarcă</button>
+                <button id="saveBtn" type="button" disabled> Salvează</button>
+                <button id="loadBtn" type="button" disabled> Încarcă</button>
             </div>
             <br><br>
 
             <select id="savedLists">
                 <option value="">-- Alege un șir salvat --</option>
             </select>
-            <button id="deleteBtn" type="button" disabled>🗑️ Sterge</button>
+            <button id="deleteBtn" type="button" disabled> Sterge</button>
         </form>
 
         <div id="result" class="result-box">Rezultatul va apărea aici.</div>

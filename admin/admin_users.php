@@ -116,7 +116,7 @@ $token = $_SESSION['token'];
 <body>
     <div class="admin-container">
         <a href="../index.php" class="back-btn">⬅ Înapoi la Pagina Principală</a>
-        <h2 class="admin-title">⚙️ Administrare Utilizatori</h2>
+        <h2 class="admin-title"> Administrare Utilizatori</h2>
         <table class="admin-table">
             <thead>
                 <tr>
