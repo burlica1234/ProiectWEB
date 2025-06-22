@@ -15,6 +15,12 @@ $token = $_SESSION['token'];
     <script>
         const token = <?= json_encode($token) ?>;
 
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         async function fetchUsers() {
             const res = await fetch('get_users.php', {
                 headers: { 'X-Auth-Token': token }
@@ -30,8 +36,8 @@ $token = $_SESSION['token'];
 
             users.forEach(user => {
                 const row = `<tr>
-                    <td>${user.username}</td>
-                    <td>${user.email}</td>
+                    <td>${escapeHtml(user.username)}</td>
+                    <td>${escapeHtml(user.email)}</td>
                     <td>${user.role}</td>
                     <td>
                         <select onchange="changeRole(${user.id}, this.value)">
